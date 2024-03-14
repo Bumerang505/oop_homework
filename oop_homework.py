@@ -165,3 +165,4 @@ def lecturer_rating(lecturer_list, course_name):
 
 print(f"Средняя оценка для всех студентов по курсу {'Python'}: {student_rating(student_list, 'Python')}")
 print(f"Средняя оценка для всех лекторов по курсу {'Python'}: {lecturer_rating(lecturer_list, 'Python')}")
+
