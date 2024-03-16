@@ -56,7 +56,7 @@ class Lecturer(Mentor):
             grades_count += len(self.grades[v])
         self.average_rating = sum(map(sum, self.grades.values())) / grades_count
         return (f'Имя: {self.name}\nФамилия: {self.surname}\n'
-                f'Средняя оценка за лекции: {self.average_rating.__round__(2)}')
+                f'Средняя оценка за лекции: {self.average_rating.__round__(1)}')
 
     def __lt__(self, other):
         if not isinstance(other, Lecturer):
@@ -141,10 +141,10 @@ student_list = [best_student_1, best_student_2]
 lecturer_list = [best_lecturer_1, best_lecturer_2]
 
 
-def student_rating(student_list, course_name):
+def student_rating(student_list_n, course_name):
     sum_all = 0
-    count_all=0
-    for stud in student_list:
+    count_all = 0
+    for stud in student_list_n:
         if course_name in stud.courses_in_progress:
             sum_all += sum(stud.grades.get(course_name, []))
             count_all = len(stud.grades.get(course_name, []))
@@ -152,17 +152,16 @@ def student_rating(student_list, course_name):
     return average_for_all
 
 
-def lecturer_rating(lecturer_list, course_name):
+def lecturer_rating(lecturer_list_n, course_name):
     sum_all = 0
     count_all = 0
-    for lect in lecturer_list:
+    for lect in lecturer_list_n:
         if lect.courses_attached == [course_name]:
             sum_all += lect.average_rating
             count_all += 1
     average_for_all = sum_all / count_all
-    return average_for_all
+    return round(average_for_all, 1)
 
 
 print(f"Средняя оценка для всех студентов по курсу {'Python'}: {student_rating(student_list, 'Python')}")
 print(f"Средняя оценка для всех лекторов по курсу {'Python'}: {lecturer_rating(lecturer_list, 'Python')}")
-
